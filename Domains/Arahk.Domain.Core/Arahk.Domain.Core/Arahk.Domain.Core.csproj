@@ -6,7 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>        
+    <ItemGroup>
+        <InternalsVisibleTo Include="Arahk.Infrastructure" />
         <InternalsVisibleTo Include="Arahk.Application.Test" />
     </ItemGroup>
 </Project>

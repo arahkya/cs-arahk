@@ -1,7 +1,9 @@
-﻿using Arahk.Application.User.ChangePassword;
+﻿using Arahk.Application.Repository;
+using Arahk.Application.User.ChangePassword;
 using Arahk.Application.User.CreateAccessToken;
 using Arahk.Application.User.Login;
 using Arahk.Application.User.Register;
+using Arahk.Domain.Core.Common.ValueObjects;
 using Arahk.Domain.Identity.Entities;
 using Arahk.Domain.Identity.Repositories;
 using Arahk.Domain.Identity.ValueObjects;
@@ -16,7 +18,7 @@ public class UserUnitTest
     {
         // Arrange
         const string username = "test0001";
-        var mockUser = new UserEntity(Guid.NewGuid(), username, "test!1234", "test@test.com")
+        var mockUser = new UserEntity(Guid.NewGuid(), new UsernameValueObject(username),  new PasswordValueObject("test!1234"),  new EmailValueObject("test@test.com"))
         {
             HashedPassword =
             {
@@ -47,7 +49,7 @@ public class UserUnitTest
     {
         // Arrange
         const string username = "test0001";
-        var mockUser = new UserEntity(Guid.NewGuid(), username, "test!1234", "test@test.com")
+        var mockUser = new UserEntity(Guid.NewGuid(), new UsernameValueObject(username),  new PasswordValueObject("test!1234"),  new EmailValueObject("test@test.com"))
         {
             HashedPassword =
             {
@@ -78,7 +80,7 @@ public class UserUnitTest
     {
         // Arrange
         const string username = "test0001";
-        var mockUser = new UserEntity(Guid.NewGuid(), username, "test!1234", "test@test.com")
+        var mockUser = new UserEntity(Guid.NewGuid(), new UsernameValueObject(username),  new PasswordValueObject("test!1234"),  new EmailValueObject("test@test.com"))
         {
             HashedPassword =
             {
@@ -109,8 +111,11 @@ public class UserUnitTest
     public async Task UserRegisterTest()
     {
         // Arrange
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
         var userRepositoryMock = new Mock<IUserRepository>();
+        
         userRepositoryMock.Setup(p => p.ExistsAsync(It.IsAny<UsernameValueObject>())).ReturnsAsync(false);
+        unitOfWorkMock.Setup(p => p.UserRepository).Returns(userRepositoryMock.Object);
 
         var request = new UserRegisterRequest
         {
@@ -119,7 +124,7 @@ public class UserUnitTest
             Email = "test@email.com",
         };
         
-        var handler = new UserRegisterHandler(userRepositoryMock.Object);
+        var handler = new UserRegisterHandler(unitOfWorkMock.Object);
         
         // Action
         var user = await handler.Handle(request);
@@ -144,8 +149,11 @@ public class UserUnitTest
     public async Task UserRegisterInvalidTest(string username, string password, string email)
     {
         // Arrange
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
         var userRepositoryMock = new Mock<IUserRepository>();
-        userRepositoryMock.Setup(p => p.ExistsAsync(It.IsAny<UsernameValueObject>())).ReturnsAsync(() => false);;
+        
+        userRepositoryMock.Setup(p => p.ExistsAsync(It.IsAny<UsernameValueObject>())).ReturnsAsync(false);
+        unitOfWorkMock.Setup(p => p.UserRepository).Returns(userRepositoryMock.Object);
 
         var request = new UserRegisterRequest
         {
@@ -154,7 +162,7 @@ public class UserUnitTest
             Email = email
         };
         
-        var handler = new UserRegisterHandler(userRepositoryMock.Object);
+        var handler = new UserRegisterHandler(unitOfWorkMock.Object);
         
         // Action
         await Assert.ThrowsAsync<InvalidDataException>(() => handler.Handle(request));

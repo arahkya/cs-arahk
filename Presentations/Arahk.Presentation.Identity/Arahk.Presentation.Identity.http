@@ -1,0 +1,21 @@
+< {% 
+ request.variables.set("HostAddress", "http://localhost:5082")
+ %}
+
+GET {{HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+< {%
+    request.variables.set("HostAddress", "http://localhost:5082")
+%}
+
+POST {{HostAddress}}/UserIdentity/
+Content-Type: application/json
+
+{
+  "Username": "Test1234",
+  "Password": "Password!123",
+  "Email": "test123@test.com"
+}
