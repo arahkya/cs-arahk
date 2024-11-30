@@ -1,4 +1,5 @@
-﻿using Arahk.Application.User.Login;
+﻿using Arahk.Application.User.ChangePassword;
+using Arahk.Application.User.Login;
 using Arahk.Application.User.Register;
 using Arahk.Domain.Identity.Entities;
 using Arahk.Domain.Identity.Repositories;
@@ -37,7 +38,39 @@ public class UserUnitTest
         var user = await handler.Handle(request);
         
         // Assert
-        Assert.NotEqual(Guid.Empty, user.Id);
+        Assert.NotEqual(Guid.Empty, user!.Id);
+    }
+    
+    [Fact]
+    public async Task UserChangePasswordTest()
+    {
+        // Arrange
+        const string username = "test0001";
+        var mockUser = new UserEntity(Guid.NewGuid(), username, "test!1234", "test@test.com")
+        {
+            HashedPassword =
+            {
+                Value = "cv3Yv/nf3F966cHnvgYXtJPRceJbziQ3U+xq6hH0SNIrsvo5EI6/UJ9Orecnzu3t"
+            }
+        };
+
+        var userRepositoryMock = new Mock<IUserRepository>();
+        userRepositoryMock.Setup(p => p.GetByUserNameAsync(It.IsAny<UsernameValueObject>())).ReturnsAsync(mockUser);
+        
+        var request = new UserChangePasswordRequest
+        {
+            Username = "test0001",
+            OldPassword = "test!1234",
+            NewPassword = "test@123"
+        };
+        
+        var handler = new UserChangePasswordHandler(userRepositoryMock.Object);
+        
+        // Action
+        await handler.Handle(request);
+        
+        // Assert
+        // No error throw assert    
     }
     
     [Fact]

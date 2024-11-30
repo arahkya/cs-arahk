@@ -14,4 +14,9 @@ public class UserEntity(Guid id, string username, string password, string email)
     {
         return Username.IsValid() && HashedPassword.IsValid() && Email.IsValid();
     }
+
+    public void ChangePassword(string password)
+    {
+        HashedPassword = new PasswordValueObject(password);
+    }
 }
