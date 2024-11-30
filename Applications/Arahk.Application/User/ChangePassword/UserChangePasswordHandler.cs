@@ -12,14 +12,14 @@ public class UserChangePasswordHandler(IUserRepository userRepository)
         
         if (user == null)
         {
-            throw new ApplicationException("User not found");
+            return;
         }
         
         var isPasswordValid = PasswordHashService.VerifyPassword(request.OldPassword, user.HashedPassword.Value);
         
         if (!isPasswordValid)
         {
-            throw new ApplicationException("Invalid password");
+            return;
         }
 
         user.ChangePassword(request.NewPassword);

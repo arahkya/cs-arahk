@@ -1,4 +1,5 @@
 ﻿using Arahk.Application.User.ChangePassword;
+using Arahk.Application.User.CreateAccessToken;
 using Arahk.Application.User.Login;
 using Arahk.Application.User.Register;
 using Arahk.Domain.Identity.Entities;
@@ -39,6 +40,37 @@ public class UserUnitTest
         
         // Assert
         Assert.NotEqual(Guid.Empty, user!.Id);
+    }
+    
+    [Fact]
+    public async Task UserCreateAccessTokenTest()
+    {
+        // Arrange
+        const string username = "test0001";
+        var mockUser = new UserEntity(Guid.NewGuid(), username, "test!1234", "test@test.com")
+        {
+            HashedPassword =
+            {
+                Value = "cv3Yv/nf3F966cHnvgYXtJPRceJbziQ3U+xq6hH0SNIrsvo5EI6/UJ9Orecnzu3t"
+            }
+        };
+
+        var userRepositoryMock = new Mock<IUserRepository>();
+        userRepositoryMock.Setup(p => p.GetByUserNameAsync(It.IsAny<UsernameValueObject>())).ReturnsAsync(mockUser);
+        
+        var request = new UserCreateAccessTokenRequest
+        {
+            Username = "test0001",
+            Password = "test!1234"
+        };
+        
+        var handler = new UserCreateAccessTokenHandler(userRepositoryMock.Object);
+        
+        // Action
+        var userAccessToken = await handler.Handle(request);
+        
+        // Assert
+        Assert.NotEmpty(userAccessToken);
     }
     
     [Fact]
