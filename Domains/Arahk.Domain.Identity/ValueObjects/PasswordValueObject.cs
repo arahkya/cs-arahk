@@ -4,9 +4,9 @@ using Arahk.Domain.Identity.Services;
 
 namespace Arahk.Domain.Identity.ValueObjects;
 
-public partial class PasswordValueObject : BaseValueObject<string>
+public partial class PasswordValueObject(string value) : BaseValueObject<string>(value)
 {
-    private readonly string _password;
+    private readonly string _password = value;
     public override bool IsValid()
     {
         return !string.IsNullOrEmpty(_password) && MyRegex().IsMatch(_password);
@@ -15,10 +15,8 @@ public partial class PasswordValueObject : BaseValueObject<string>
     [GeneratedRegex(@"^(?=.*[a-zA-Z])(?=.*\W)[a-zA-Z0-9\W]{6,15}$")]
     private static partial Regex MyRegex();
 
-    public PasswordValueObject(string value) : base(value)
+    public void HashPassword()
     {
-        _password = value;
-        
         base.value = PasswordHashService.HashPassword(_password);
     }
 }

@@ -26,8 +26,11 @@ public class UserUnitTest
             }
         };
 
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
         var userRepositoryMock = new Mock<IUserRepository>();
+        
         userRepositoryMock.Setup(p => p.GetByUserNameAsync(It.IsAny<UsernameValueObject>())).ReturnsAsync(mockUser);
+        unitOfWorkMock.Setup(p => p.UserRepository).Returns(userRepositoryMock.Object);
         
         var request = new UserLoginRequest
         {
@@ -35,13 +38,13 @@ public class UserUnitTest
             Password = "test!1234"
         };
         
-        var handler = new UserLoginHandler(userRepositoryMock.Object);
+        var handler = new UserLoginHandler(unitOfWorkMock.Object);
         
         // Action
-        var user = await handler.Handle(request);
+        var accessToken = await handler.Handle(request);
         
         // Assert
-        Assert.NotEqual(Guid.Empty, user!.Id);
+        Assert.NotEqual(string.Empty, accessToken);
     }
     
     [Fact]
