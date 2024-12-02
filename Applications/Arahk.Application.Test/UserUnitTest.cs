@@ -91,8 +91,11 @@ public class UserUnitTest
             }
         };
 
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
         var userRepositoryMock = new Mock<IUserRepository>();
+        
         userRepositoryMock.Setup(p => p.GetByUserNameAsync(It.IsAny<UsernameValueObject>())).ReturnsAsync(mockUser);
+        unitOfWorkMock.Setup(p => p.UserRepository).Returns(userRepositoryMock.Object);
         
         var request = new UserChangePasswordRequest
         {
@@ -101,7 +104,7 @@ public class UserUnitTest
             NewPassword = "test@123"
         };
         
-        var handler = new UserChangePasswordHandler(userRepositoryMock.Object);
+        var handler = new UserChangePasswordHandler(unitOfWorkMock.Object);
         
         // Action
         await handler.Handle(request);

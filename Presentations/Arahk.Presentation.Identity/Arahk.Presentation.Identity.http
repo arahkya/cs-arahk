@@ -33,3 +33,18 @@ Content-Type: application/json
   "Username": "Test1234",
   "Password": "Password!123"
 }
+
+###
+
+< {%
+    request.variables.set("HostAddress", "http://localhost:5082")
+%}
+
+POST {{HostAddress}}/UserIdentity/UserChangePassword
+Content-Type: application/json
+
+{
+  "Username": "Test1234",
+  "OldPassword": "Password!123",
+  "NewPassword": "Password?123"
+}

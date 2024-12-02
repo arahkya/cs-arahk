@@ -1,4 +1,5 @@
 using Arahk.Application.Repository;
+using Arahk.Application.User.ChangePassword;
 using Arahk.Application.User.Login;
 using Arahk.Application.User.Register;
 using Arahk.Domain.Identity.Repositories;
@@ -44,5 +45,23 @@ public class UserIdentityController(ILogger<UserIdentityController> logger, IUni
         var accessToken = await handler.Handle(request);
         
         return Ok(accessToken);
+    }
+    
+    [HttpPost(Name = "UserChangePassword")]
+    [Route("UserChangePassword")]
+    public async Task<IActionResult> ChangePassword([FromBody] UserChangePasswordViewModel model)
+    {
+        var request = new UserChangePasswordRequest
+        {
+            Username = model.Username,
+            OldPassword = model.OldPassword,
+            NewPassword = model.NewPassword
+        };
+        
+        var handler = new UserChangePasswordHandler(unitOfWork);
+        
+        await handler.Handle(request);
+        
+        return Ok();
     }
 }
