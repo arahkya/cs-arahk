@@ -3,7 +3,7 @@ using Arahk.Domain.Identity.Repositories;
 using Arahk.Domain.Identity.Services;
 using Arahk.Domain.Identity.ValueObjects;
 
-namespace Arahk.Application.User.CreateAccessToken;
+namespace Arahk.Application.Usecases.User.CreateAccessToken;
 
 public class UserCreateAccessTokenHandler(IUserRepository userRepository)
 {

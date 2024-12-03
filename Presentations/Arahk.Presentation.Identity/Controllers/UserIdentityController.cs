@@ -1,8 +1,7 @@
 using Arahk.Application.Repository;
-using Arahk.Application.User.ChangePassword;
-using Arahk.Application.User.Login;
-using Arahk.Application.User.Register;
-using Arahk.Domain.Identity.Repositories;
+using Arahk.Application.Usecases.User.ChangePassword;
+using Arahk.Application.Usecases.User.Login;
+using Arahk.Application.Usecases.User.Register;
 using Arahk.Presentation.Identity.Models;
 using Microsoft.AspNetCore.Mvc;
 

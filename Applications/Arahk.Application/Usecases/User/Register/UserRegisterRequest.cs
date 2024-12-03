@@ -1,4 +1,4 @@
-namespace Arahk.Application.User.Register;
+namespace Arahk.Application.Usecases.User.Register;
 
 public class UserRegisterRequest
 {

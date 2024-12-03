@@ -1,9 +1,8 @@
 using Arahk.Application.Repository;
-using Arahk.Domain.Identity.Repositories;
 using Arahk.Domain.Identity.Services;
 using Arahk.Domain.Identity.ValueObjects;
 
-namespace Arahk.Application.User.ChangePassword;
+namespace Arahk.Application.Usecases.User.ChangePassword;
 
 public class UserChangePasswordHandler(IUnitOfWork unitOfWork)
 {

@@ -3,7 +3,7 @@ using Arahk.Application.Services;
 using Arahk.Domain.Identity.Services;
 using Arahk.Domain.Identity.ValueObjects;
 
-namespace Arahk.Application.User.Login;
+namespace Arahk.Application.Usecases.User.Login;
 
 public class UserLoginHandler(IUnitOfWork unitOfWork)
 {

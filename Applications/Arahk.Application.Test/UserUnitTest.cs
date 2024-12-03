@@ -1,8 +1,8 @@
 ﻿using Arahk.Application.Repository;
-using Arahk.Application.User.ChangePassword;
-using Arahk.Application.User.CreateAccessToken;
-using Arahk.Application.User.Login;
-using Arahk.Application.User.Register;
+using Arahk.Application.Usecases.User.ChangePassword;
+using Arahk.Application.Usecases.User.CreateAccessToken;
+using Arahk.Application.Usecases.User.Login;
+using Arahk.Application.Usecases.User.Register;
 using Arahk.Domain.Core.Common.ValueObjects;
 using Arahk.Domain.Identity.Entities;
 using Arahk.Domain.Identity.Repositories;

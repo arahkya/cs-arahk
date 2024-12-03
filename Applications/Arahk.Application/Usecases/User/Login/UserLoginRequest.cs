@@ -1,6 +1,6 @@
-namespace Arahk.Application.User.CreateAccessToken;
+namespace Arahk.Application.Usecases.User.Login;
 
-public class UserCreateAccessTokenRequest
+public class UserLoginRequest
 {
     public required string Username { get; init; }
     public required string Password { get; init; }

@@ -1,4 +1,4 @@
-namespace Arahk.Application.User.ChangePassword;
+namespace Arahk.Application.Usecases.User.ChangePassword;
 
 public class UserChangePasswordRequest
 {

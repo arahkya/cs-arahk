@@ -4,7 +4,7 @@ using Arahk.Domain.Core.Common.ValueObjects;
 using Arahk.Domain.Identity.Entities;
 using Arahk.Domain.Identity.ValueObjects;
 
-namespace Arahk.Application.User.Register;
+namespace Arahk.Application.Usecases.User.Register;
 
 public class UserRegisterHandler(IUnitOfWork unitOfWork)
 {
