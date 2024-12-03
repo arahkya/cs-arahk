@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Arahk.Domain.Core\Arahk.Domain.Core\Arahk.Domain.Core.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="Arahk.Application" />
+        <InternalsVisibleTo Include="Arahk.Application.Test" />
+    </ItemGroup>
+
+</Project>

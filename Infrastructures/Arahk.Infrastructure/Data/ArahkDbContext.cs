@@ -1,6 +1,7 @@
 using Arahk.Domain.Core.Common.ValueObjects;
 using Arahk.Domain.Identity.Entities;
 using Arahk.Domain.Identity.ValueObjects;
+using Arahk.Domain.Membership.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Arahk.Infrastructure.Data;
@@ -8,6 +9,7 @@ namespace Arahk.Infrastructure.Data;
 public class ArahkDbContext(DbContextOptions<ArahkDbContext> options) : DbContext(options)
 {
     public DbSet<UserEntity> Users { get; set; }
+    public DbSet<UserProfileEntity> UserProfiles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
