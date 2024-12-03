@@ -4,6 +4,7 @@ using Arahk.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arahk.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ArahkDbContext))]
-    partial class ArahkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205095405_Initial Database and Tables")]
+    partial class InitialDatabaseandTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
