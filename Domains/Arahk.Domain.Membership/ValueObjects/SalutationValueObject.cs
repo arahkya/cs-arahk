@@ -6,6 +6,6 @@ public class SalutationValueObject(string value) : BaseValueObject<string>(value
 {
     public override bool IsValid()
     {
-        throw new NotImplementedException();
+        return !string.IsNullOrWhiteSpace(value);
     }
 }

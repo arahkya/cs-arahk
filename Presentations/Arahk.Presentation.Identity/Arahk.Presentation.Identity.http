@@ -48,3 +48,21 @@ Content-Type: application/json
   "OldPassword": "Password!123",
   "NewPassword": "Password?123"
 }
+
+###
+
+< {%
+    request.variables.set("HostAddress", "http://localhost:5082")
+%}
+
+PATCH {{HostAddress}}/UserProfile
+Content-Type: application/json
+
+{
+  "Salutation": "Mr",
+  "Firstname": "Arahk",
+  "Lastname": "Yambupah",
+  "Gender": "Male",
+  "PrimaryMobilePhone": "0917712328",
+  "Username": "Test1234"
+}

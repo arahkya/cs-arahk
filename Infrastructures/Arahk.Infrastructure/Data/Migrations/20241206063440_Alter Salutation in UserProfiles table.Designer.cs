@@ -4,6 +4,7 @@ using Arahk.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arahk.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ArahkDbContext))]
-    partial class ArahkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241206063440_Alter Salutation in UserProfiles table")]
+    partial class AlterSalutationinUserProfilestable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

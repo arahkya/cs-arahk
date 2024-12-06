@@ -1,5 +1,6 @@
 using Arahk.Domain.Membership.Entities;
 using Arahk.Domain.Membership.Repositories;
+using Arahk.Domain.Membership.ValueObjects;
 using Arahk.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
